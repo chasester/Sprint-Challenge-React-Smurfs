@@ -37,7 +37,19 @@ class App extends Component {
         <div className="App">
           <Route path="/form" exact render={(props) => <SmurfForm {...props} submitCb={(obj) => this.addSmurf(obj)}/>}/>
           <Route path="/" exact render={(props) => <Smurfs {...props} smurfs={this.state.smurfs} />}/>
-         
+          <Route path="/smurfs/:id" exact render={(props) =>
+          {
+           
+            var smurf = this.state.smurfs[props.match.params.id];
+          return(<Smurf {...props}
+              name={smurf.name}
+              id={smurf.id}
+              age={smurf.age}
+              height={smurf.height}
+              key={smurf.id} 
+            />);
+          }
+          }/>
         </div>
       </Router>
     );
