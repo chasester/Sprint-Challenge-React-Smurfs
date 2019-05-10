@@ -39,8 +39,10 @@ class App extends Component {
           <Route path="/" exact render={(props) => <Smurfs {...props} smurfs={this.state.smurfs} />}/>
           <Route path="/smurfs/:id" exact render={(props) =>
           {
-           
-            var smurf = this.state.smurfs[props.match.params.id];
+            try{
+            var smurf = this.state.smurfs[props.match.params.id]
+            smurf.name;
+            }catch(err) {return <Redirect to="/"/>}
           return(<Smurf {...props}
               name={smurf.name}
               id={smurf.id}
