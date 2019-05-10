@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 
 class SmurfForm extends Component {
   constructor(props) {
@@ -8,12 +9,14 @@ class SmurfForm extends Component {
       age: '',
       height: ''
     };
+    this.redirect = false;
   }
 
   addSmurf = event => {
     event.preventDefault();
     // add code to create the smurf using the api
-
+    this.props.submitCb(this.state);
+    this.redirect = true;
     this.setState({
       name: '',
       age: '',
@@ -26,6 +29,7 @@ class SmurfForm extends Component {
   };
 
   render() {
+    if(this.redirect){ this.redirect = false; return (<Redirect to="/"/>) }
     return (
       <div className="SmurfForm">
         <form onSubmit={this.addSmurf}>
